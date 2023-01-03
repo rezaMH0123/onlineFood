@@ -1,12 +1,34 @@
 import React from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, { Autoplay } from 'swiper'
+import 'swiper/css'
+import '../../src/swiper.css'
 
+import food1 from '../assets/foods/4.jpg'
+import food2 from '../assets/foods/7.jpg'
+import food3 from '../assets/foods/8.jpg'
+import food4 from '../assets/foods/9.jpg'
+
+const popularFoods = [
+  { id: 1, name: 'پیتزا' },
+  { id: 2, name: 'کباب' },
+  { id: 3, name: 'سوپ' },
+  { id: 4, name: 'ساندوسچ' },
+  { id: 5, name: 'غذا ایرانی' },
+  { id: 6, name: 'سوخاری' },
+  { id: 7, name: 'پاستا' },
+  { id: 8, name: 'سالاد' },
+  { id: 9, name: 'استیک' },
+  { id: 10, name: 'صبحانه' },
+]
 const Landing = () => {
+  SwiperCore.use([Autoplay])
   return (
     <div className="w-full">
       <div className="header bg-white h-[330px] ">
         <div className="main-header flex bg-white h-[100px] fixed top-0 left-0 right-0 z-20">
-          <div className="flex-1 flex items-center pl-2 ">
-            <div className=" cursor-pointer bg-[#ff0000]  md:w-20 md:h-12 w-12 h-8 rounded-md">
+          <div className="flex-1 flex items-center pl-2">
+            <div className=" cursor-pointer bg-[#ff0000]  md:w-20 md:h-12 w-12 h-8 rounded-md  md:ml-4">
               <img
                 alt="shopingCart"
                 className="md:w-18 md:h-10 w-16 h-9 relative top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-2 md:p-1"
@@ -83,7 +105,7 @@ const Landing = () => {
           </div>
         </div>
         <form>
-          <div className="serching flex flex-row-reverse items-center md:pr-8 pr-2 bg-[#f8f8f8] relative top-[110px] h-[100px] ">
+          <div className="serching flex flex-row-reverse items-center justify-center  bg-[#f8f8f8] relative top-[110px] h-[100px] ">
             <div className="search-input flex flex-row-reverse items-center pr-2  md:w-10/12 w-8/12 h-[60%] bg-white rounded-md">
               <div className="search-logo flex flex-row-reverse items-center h-[70%] w-full">
                 <svg
@@ -103,10 +125,10 @@ const Landing = () => {
                 />
               </div>
             </div>
-            <div className=" search-btn mr-2 md:w-28 w:24 ml-2 h-[60%]">
+            <div className=" search-btn mr-2 md:w-32 w:24 ml-2 h-[60%]">
               <button
                 type="submit"
-                className="text-white  bg-[#ef4123] hover:bg-[#cb3c23] focus:ring-4 focus:outline-non font-medium rounded-lg md:text-md text-xs px-4  w-full h-full"
+                className="text-white  bg-[#ef4123] hover:bg-[#cb3c23] focus:ring-4 focus:outline-non font-medium rounded-lg md:text-lg text-xs px-4  w-full h-full"
               >
                 جست و جو
               </button>
@@ -115,7 +137,52 @@ const Landing = () => {
         </form>
       </div>
 
-      <div className="body border border-red-600 bg-gray-400 h-[4000px]"></div>
+      <div className="body flex justify-center border border-red-600  h-[4000px]">
+        <div className="content w-[85%] h-full">
+          <div className="slider rounded-2xl w-[100%] md:h-[450px] h-[250px] mt-8">
+            <Swiper
+              loop={true}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              className="mySwipe rounded-2xl"
+            >
+              <SwiperSlide>
+                <img alt="food1" src={food1} />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img alt="food2" src={food2} />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img alt="food3" src={food3} />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img alt="food4" src={food4} />
+              </SwiperSlide>
+            </Swiper>
+          </div>
+          <div className="popular text-right border border-red-500 w-full h-[400px] mt-16">
+            <p className="md:text-5xl text-3xl">محبوب ترین ها</p>
+            <div className="w-full h-full flex justify-center">
+              <div className=" w-[90%] h-4/5 mt-5 grid grid-cols-5 gap-4">
+                {popularFoods.map((item, id) => (
+                  <div
+                    key={id}
+                    className="border border-red-500 rounded-lg cursor-pointer"
+                  >
+                    <img
+                      className="rounded-lg w-full h-full"
+                      alt="pfood"
+                      src={require(`../assets/foods/popular/${item.id}.jpg`)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="footer border border-gray-700 bg-gray-600 h-[300px]"></div>
     </div>
   )
