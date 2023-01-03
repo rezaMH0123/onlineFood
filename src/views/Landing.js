@@ -13,7 +13,7 @@ const popularFoods = [
   { id: 1, name: 'پیتزا' },
   { id: 2, name: 'کباب' },
   { id: 3, name: 'سوپ' },
-  { id: 4, name: 'ساندوسچ' },
+  { id: 4, name: 'ساندویچ' },
   { id: 5, name: 'غذا ایرانی' },
   { id: 6, name: 'سوخاری' },
   { id: 7, name: 'پاستا' },
@@ -162,20 +162,23 @@ const Landing = () => {
               </SwiperSlide>
             </Swiper>
           </div>
-          <div className="popular text-right border border-red-500 w-full h-[400px] mt-16">
+          <div className="popular text-right  w-full h-[400px] mt-16">
             <p className="md:text-5xl text-3xl">محبوب ترین ها</p>
             <div className="w-full h-full flex justify-center">
-              <div className=" w-[90%] h-4/5 mt-5 grid grid-cols-5 gap-4">
+              <div className=" w-[95%] h-4/5 mt-8 grid grid-cols-5 gap-4">
                 {popularFoods.map((item, id) => (
                   <div
                     key={id}
-                    className="border border-red-500 rounded-lg cursor-pointer"
+                    className="relative rounded-lg cursor-pointer h-32"
                   >
                     <img
                       className="rounded-lg w-full h-full"
                       alt="pfood"
                       src={require(`../assets/foods/popular/${item.id}.jpg`)}
                     />
+                    <span className="absolute right-3 bottom-3 text-white text-2xl">
+                      {item.name}
+                    </span>
                   </div>
                 ))}
               </div>
