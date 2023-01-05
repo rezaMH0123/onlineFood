@@ -1,32 +1,46 @@
-import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Autoplay } from 'swiper'
-import 'swiper/css'
-import '../../src/swiper.css'
+import React, { useLayoutEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Autoplay, Pagination } from "swiper";
+import "swiper/css";
+import "../../src/swiper.css";
 
-import food1 from '../assets/foods/4.jpg'
-import food2 from '../assets/foods/7.jpg'
-import food3 from '../assets/foods/8.jpg'
-import food4 from '../assets/foods/9.jpg'
+import food1 from "../assets/foods/4.jpg";
+import food2 from "../assets/foods/7.jpg";
+import food3 from "../assets/foods/8.jpg";
+import food4 from "../assets/foods/9.jpg";
+import FoodCard from "../components/FoodCard";
 
 const popularFoods = [
-  { id: 1, name: 'پیتزا' },
-  { id: 2, name: 'کباب' },
-  { id: 3, name: 'سوپ' },
-  { id: 4, name: 'ساندویچ' },
-  { id: 5, name: 'غذا ایرانی' },
-  { id: 6, name: 'سوخاری' },
-  { id: 7, name: 'پاستا' },
-  { id: 8, name: 'سالاد' },
-  { id: 9, name: 'استیک' },
-  { id: 10, name: 'صبحانه' },
-]
+  { id: 1, name: "پیتزا" },
+  { id: 2, name: "کباب" },
+  { id: 3, name: "سوپ" },
+  { id: 4, name: "ساندویچ" },
+  { id: 5, name: "غذا ایرانی" },
+  { id: 6, name: "سوخاری" },
+  { id: 7, name: "پاستا" },
+  { id: 8, name: "سالاد" },
+  { id: 9, name: "استیک" },
+  { id: 10, name: "صبحانه" },
+];
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+}
 const Landing = () => {
-  SwiperCore.use([Autoplay])
+  SwiperCore.use([Autoplay]);
+  const [width, height] = useWindowSize();
   return (
     <div className="w-full">
       <div className="header bg-white h-[330px] ">
-        <div className="main-header flex bg-white h-[100px] fixed top-0 left-0 right-0 z-20">
+        <div className="main-header border-b border-gray-200 flex bg-white h-[100px] fixed top-0 left-0 right-0 z-20">
           <div className="flex-1 flex items-center pl-2">
             <div className=" cursor-pointer bg-[#ff0000]  md:w-20 md:h-12 w-12 h-8 rounded-md  md:ml-4">
               <img
@@ -86,7 +100,7 @@ const Landing = () => {
             <span className="text-[#ff0000] text-2xl flex items-center mr-2">
               طهران
             </span>
-            <spann className="flex items-center mt-2">
+            <span className="flex items-center mt-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -101,7 +115,7 @@ const Landing = () => {
                   d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                 />
               </svg>
-            </spann>
+            </span>
           </div>
         </div>
         <form>
@@ -111,7 +125,7 @@ const Landing = () => {
                 <svg
                   viewBox="0 0 20 20"
                   aria-hidden="true"
-                  style={{ transform: 'rotateY(180deg)' }}
+                  style={{ transform: "rotateY(180deg)" }}
                   className="pointer-events-none inset-y-0 left-0 h-full w-8 fill-slate-500 transition"
                 >
                   <path d="M16.72 17.78a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM9 14.5A5.5 5.5 0 0 1 3.5 9H2a7 7 0 0 0 7 7v-1.5ZM3.5 9A5.5 5.5 0 0 1 9 3.5V2a7 7 0 0 0-7 7h1.5ZM9 3.5A5.5 5.5 0 0 1 14.5 9H16a7 7 0 0 0-7-7v1.5Zm3.89 10.45 3.83 3.83 1.06-1.06-3.83-3.83-1.06 1.06ZM14.5 9a5.48 5.48 0 0 1-1.61 3.89l1.06 1.06A6.98 6.98 0 0 0 16 9h-1.5Zm-1.61 3.89A5.48 5.48 0 0 1 9 14.5V16a6.98 6.98 0 0 0 4.95-2.05l-1.06-1.06Z"></path>
@@ -137,7 +151,7 @@ const Landing = () => {
         </form>
       </div>
 
-      <div className="body flex justify-center border border-red-600  h-[4000px]">
+      <div className="body bg-white flex justify-center h-[4000px]">
         <div className="content w-[85%] h-full">
           <div className="slider rounded-2xl w-[100%] md:h-[450px] h-[250px] mt-8">
             <Swiper
@@ -162,10 +176,10 @@ const Landing = () => {
               </SwiperSlide>
             </Swiper>
           </div>
-          <div className="popular text-right  w-full h-[400px] mt-16">
+          <div className="popular text-right  w-full h-fit p-4 mt-16">
             <p className="md:text-5xl text-3xl">محبوب ترین ها</p>
             <div className="w-full h-full flex justify-center">
-              <div className=" w-[95%] h-4/5 mt-8 grid grid-cols-5 gap-4">
+              <div className=" w-[95%] h-4/5 mt-8 grid md:grid-cols-5 grid-cols-2  gap-4">
                 {popularFoods.map((item, id) => (
                   <div
                     key={id}
@@ -184,11 +198,91 @@ const Landing = () => {
               </div>
             </div>
           </div>
+          <div className="Discount text-right w-full h-[350px] mt-16">
+            <p className="md:text-5xl text-3xl">تخفیف دار ها</p>
+            <div className="w-full h-full flex justify-center">
+              <div className="w-[95%]  h-4/5 mt-4">
+                <Swiper
+                  slidesPerView={width < 400 ? 1 : width < 720 ? 2 : 4}
+                  spaceBetween={25}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper flex flex-row-reverse rounded-lg"
+                >
+                  <SwiperSlide className="rounded-lg ">
+                    <FoodCard
+                      imgSrc={{
+                        mainfood: require(`../assets/foods/discount/0.jpg`),
+                        lable: require(`../assets/storeLable/0.png`),
+                      }}
+                      discount={true}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide className="rounded-lg">
+                    <FoodCard
+                      imgSrc={{
+                        mainfood: require(`../assets/foods/discount/0.jpg`),
+                        lable: require(`../assets/storeLable/0.png`),
+                      }}
+                      discount={true}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide className="rounded-lg">
+                    <FoodCard
+                      imgSrc={{
+                        mainfood: require(`../assets/foods/discount/0.jpg`),
+                        lable: require(`../assets/storeLable/0.png`),
+                      }}
+                      discount={true}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide className="rounded-lg">
+                    <FoodCard
+                      imgSrc={{
+                        mainfood: require(`../assets/foods/discount/0.jpg`),
+                        lable: require(`../assets/storeLable/0.png`),
+                      }}
+                      discount={true}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide className="rounded-lg">
+                    <FoodCard
+                      imgSrc={{
+                        mainfood: require(`../assets/foods/discount/0.jpg`),
+                        lable: require(`../assets/storeLable/0.png`),
+                      }}
+                      discount={true}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide className="rounded-lg">
+                    <FoodCard
+                      imgSrc={{
+                        mainfood: require(`../assets/foods/discount/0.jpg`),
+                        lable: require(`../assets/storeLable/0.png`),
+                      }}
+                      discount={true}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide className="rounded-lg">
+                    <FoodCard
+                      imgSrc={{
+                        mainfood: require(`../assets/foods/discount/0.jpg`),
+                        lable: require(`../assets/storeLable/0.png`),
+                      }}
+                      discount={true}
+                    />
+                  </SwiperSlide>
+                </Swiper>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="footer border border-gray-700 bg-gray-600 h-[300px]"></div>
     </div>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;
