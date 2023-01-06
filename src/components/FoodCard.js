@@ -1,5 +1,5 @@
 const FoodCard = (props) => {
-  const { imgSrc, discount } = props;
+  const { imgSrc, discount, name, Ncomment, discountNum, address } = props;
   return (
     <div
       style={{ boxShadow: "0 14px 20px rgb(56 60 71 / 10%)" }}
@@ -17,11 +17,11 @@ const FoodCard = (props) => {
       </div>
       <div className="bottomCard h-2/5">
         <div className="foodName  text-right p-2">
-          <p className="font-bold">بستنی جلاتو</p>
+          <p className="font-bold">{name}</p>
         </div>
         <div>
           <div className="flex justify-end">
-            <span className="mr-2 text-[#888]">تهران</span>
+            <span className="mr-2 text-[#888]">{address}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -44,19 +44,23 @@ const FoodCard = (props) => {
           </div>
         </div>
         <div className="text-left text-sm pl-2 text-[#888]">
-          <span>{`(${980}نظر)`}</span>
+          <span>{`(${Ncomment}نظر)`}</span>
         </div>
+      </div>
+
+      <div
+        style={{ boxShadow: "0 5px 10px rgb(56 60 71 / 10%)" }}
+        className="absolute top-32 left-2 z-30 bg-white h-10 w-20 rounded-xl"
+      >
+        <span className="text-sm">
+          45-25
+          <p className="text-sm text-[#888] relative -top-1">دقیقه</p>
+        </span>
       </div>
       <>
         {discount ? (
-          <div
-            style={{ boxShadow: "0 5px 10px rgb(56 60 71 / 10%)" }}
-            className="absolute top-32 left-2 z-30 bg-white h-10 w-20 rounded-xl"
-          >
-            <span className="text-sm">
-              45-25
-              <p className="text-sm text-[#888] relative -top-1">دقیقه</p>
-            </span>
+          <div className="bg-red-500 rounded-full text-center flex justify-center items-center w-10 h-10 absolute top-2 left-3">
+            <span className="text-white text-sm">{discountNum}</span>
           </div>
         ) : null}
       </>

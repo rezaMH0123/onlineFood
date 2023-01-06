@@ -3,12 +3,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 import "swiper/css";
 import "../../src/swiper.css";
+import Input from "react-phone-number-input/input";
+
+import iphone from "../assets/icons/fig-iphone.png";
 
 import food1 from "../assets/foods/4.jpg";
 import food2 from "../assets/foods/7.jpg";
 import food3 from "../assets/foods/8.jpg";
 import food4 from "../assets/foods/9.jpg";
 import FoodCard from "../components/FoodCard";
+
+const mobileAppAownload = [
+  "0.png",
+  "1.png",
+  "2.png",
+  "3.png",
+  "4.png",
+  "6.png",
+];
 
 const popularFoods = [
   { id: 1, name: "پیتزا" },
@@ -21,6 +33,50 @@ const popularFoods = [
   { id: 8, name: "سالاد" },
   { id: 9, name: "استیک" },
   { id: 10, name: "صبحانه" },
+];
+const foods = [
+  {
+    id: 1,
+    foodName: "بستنی جلاتو",
+    addres: "طهران",
+    Ncomment: 60,
+    discount: "40%",
+  },
+  {
+    id: 2,
+    foodName: "همبرگر ذغالی",
+    addres: "جردن",
+    Ncomment: 680,
+    discount: "50%",
+  },
+  {
+    id: 3,
+    foodName: " دیزی",
+    addres: "ولیعصر",
+    Ncomment: 700,
+    discount: "70%",
+  },
+  {
+    id: 4,
+    foodName: " پیتزا",
+    addres: "یزد",
+    Ncomment: 325,
+    discount: "26%",
+  },
+  {
+    id: 5,
+    foodName: " کباب ",
+    addres: "اصفهان",
+    Ncomment: 310,
+    discount: "60%",
+  },
+  {
+    id: 6,
+    foodName: "فست فود عربی",
+    addres: "شیراز",
+    Ncomment: 270,
+    discount: "10%",
+  },
 ];
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
@@ -37,6 +93,8 @@ function useWindowSize() {
 const Landing = () => {
   SwiperCore.use([Autoplay]);
   const [width, height] = useWindowSize();
+  const [value, setValue] = useState();
+
   return (
     <div className="w-full">
       <div className="header bg-white h-[330px] ">
@@ -151,7 +209,7 @@ const Landing = () => {
         </form>
       </div>
 
-      <div className="body bg-white flex justify-center h-[4000px]">
+      <div className="body w-full bg-white flex flex-col items-center   h-fit py-4">
         <div className="content w-[85%] h-full">
           <div className="slider rounded-2xl w-[100%] md:h-[450px] h-[250px] mt-8">
             <Swiper
@@ -198,12 +256,12 @@ const Landing = () => {
               </div>
             </div>
           </div>
-          <div className="Discount text-right w-full h-[350px] mt-16">
-            <p className="md:text-5xl text-3xl">تخفیف دار ها</p>
+          <div className="Discount text-right w-full h-fit mt-16">
+            <p className="md:text-5xl text-3xl mb-6">تخفیف دار ها</p>
             <div className="w-full h-full flex justify-center">
               <div className="w-[95%]  h-4/5 mt-4">
                 <Swiper
-                  slidesPerView={width < 400 ? 1 : width < 720 ? 2 : 4}
+                  slidesPerView={width < 400 ? 1 : width < 720 ? 2 : 3}
                   spaceBetween={25}
                   pagination={{
                     clickable: true,
@@ -211,72 +269,132 @@ const Landing = () => {
                   modules={[Pagination]}
                   className="mySwiper flex flex-row-reverse rounded-lg"
                 >
-                  <SwiperSlide className="rounded-lg ">
-                    <FoodCard
-                      imgSrc={{
-                        mainfood: require(`../assets/foods/discount/0.jpg`),
-                        lable: require(`../assets/storeLable/0.png`),
-                      }}
-                      discount={true}
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide className="rounded-lg">
-                    <FoodCard
-                      imgSrc={{
-                        mainfood: require(`../assets/foods/discount/0.jpg`),
-                        lable: require(`../assets/storeLable/0.png`),
-                      }}
-                      discount={true}
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide className="rounded-lg">
-                    <FoodCard
-                      imgSrc={{
-                        mainfood: require(`../assets/foods/discount/0.jpg`),
-                        lable: require(`../assets/storeLable/0.png`),
-                      }}
-                      discount={true}
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide className="rounded-lg">
-                    <FoodCard
-                      imgSrc={{
-                        mainfood: require(`../assets/foods/discount/0.jpg`),
-                        lable: require(`../assets/storeLable/0.png`),
-                      }}
-                      discount={true}
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide className="rounded-lg">
-                    <FoodCard
-                      imgSrc={{
-                        mainfood: require(`../assets/foods/discount/0.jpg`),
-                        lable: require(`../assets/storeLable/0.png`),
-                      }}
-                      discount={true}
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide className="rounded-lg">
-                    <FoodCard
-                      imgSrc={{
-                        mainfood: require(`../assets/foods/discount/0.jpg`),
-                        lable: require(`../assets/storeLable/0.png`),
-                      }}
-                      discount={true}
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide className="rounded-lg">
-                    <FoodCard
-                      imgSrc={{
-                        mainfood: require(`../assets/foods/discount/0.jpg`),
-                        lable: require(`../assets/storeLable/0.png`),
-                      }}
-                      discount={true}
-                    />
-                  </SwiperSlide>
+                  {foods.map((item, index) => (
+                    <div key={index}>
+                      <SwiperSlide key={index} className="rounded-lg ">
+                        <FoodCard
+                          imgSrc={{
+                            mainfood: require(`../assets/foods/discount/0.jpg`),
+                            lable: require(`../assets/storeLable/0.png`),
+                          }}
+                          name={item.foodName}
+                          Ncomment={item.Ncomment}
+                          discount={item.discount ? true : false}
+                          discountNum={item.discount}
+                          address={item.addres}
+                        />
+                      </SwiperSlide>
+                    </div>
+                  ))}
                 </Swiper>
               </div>
             </div>
+          </div>
+          <div className="Discount text-right w-full h-fit mt-24">
+            <p className="md:text-5xl text-3xl mb-6">پرفروش ترین ها</p>
+            <div className="w-full h-full flex justify-center">
+              <div className="w-[95%]  h-4/5 mt-4">
+                <Swiper
+                  slidesPerView={width < 400 ? 1 : width < 720 ? 2 : 3}
+                  spaceBetween={25}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper flex flex-row-reverse rounded-lg"
+                >
+                  {foods.map((item, index) => (
+                    <div key={index}>
+                      <SwiperSlide key={index} className="rounded-lg ">
+                        <FoodCard
+                          imgSrc={{
+                            mainfood: require(`../assets/foods/discount/0.jpg`),
+                            lable: require(`../assets/storeLable/0.png`),
+                          }}
+                          name={item.foodName}
+                          Ncomment={item.Ncomment}
+                          discount={item.discount ? true : false}
+                          discountNum={item.discount}
+                          address={item.addres}
+                        />
+                      </SwiperSlide>
+                    </div>
+                  ))}
+                </Swiper>
+              </div>
+            </div>
+          </div>
+          <div className="Discount text-right w-full h-fit mt-24">
+            <p className="md:text-5xl text-3xl mb-6">جدید ترین ها</p>
+            <div className="w-full h-full flex justify-center">
+              <div className="w-[95%]  h-4/5 mt-4">
+                <Swiper
+                  slidesPerView={width < 400 ? 1 : width < 720 ? 2 : 3}
+                  spaceBetween={25}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination]}
+                  className="mySwiper flex flex-row-reverse rounded-lg"
+                >
+                  {foods.map((item, index) => (
+                    <div key={index}>
+                      <SwiperSlide key={index} className="rounded-lg ">
+                        <FoodCard
+                          imgSrc={{
+                            mainfood: require(`../assets/foods/discount/0.jpg`),
+                            lable: require(`../assets/storeLable/0.png`),
+                          }}
+                          name={item.foodName}
+                          Ncomment={item.Ncomment}
+                          discount={item.discount ? true : false}
+                          discountNum={item.discount}
+                          address={item.addres}
+                        />
+                      </SwiperSlide>
+                    </div>
+                  ))}
+                </Swiper>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="app-promotion bg-[#ddf0e2] w-full h-[650px] mt-16 flex flex-row-reverse">
+          <div className="app-text flex flex-col items-center h-full  md:w-[60%] w-full ">
+            <h1 className="md:text-4xl text-2xl font-bold mt-24">
+              JUST EAT اپلیکیشن موبایل
+            </h1>
+            <p className="mt-4 w-5/6 text-center">
+              برای دریافت لینک دانلود اپلیکیشن دلینو، شماره موبایلت رو وارد کن
+            </p>
+            <form>
+              <div className="flex flex-row-reverse mt-8">
+                <Input
+                  className="h-12 md:w-80 w-48 rounded-r-lg outline-none md:text-2xl text-xl  text-center"
+                  placeholder="+98 912 xxxxxxx"
+                  value={value}
+                  onChange={setValue}
+                />
+                <button className="bg-[#ff0000] font-bold text-white px-4 rounded-l-lg">
+                  دریافت لینک دانلود
+                </button>
+              </div>
+            </form>
+            <div className=" md:w-[55%] w-[70%] mt-10 flex justify-center h-fit">
+              <div className="w-fit grid   md:grid-cols-3 grid-cols-2 gap-3 ">
+                {mobileAppAownload.map((item) => (
+                  <div className="bg-black h-10 w-28 rounded-md cursor-pointer">
+                    <img
+                      alt="app-downlod"
+                      src={require(`../assets/mobile-app-download/${item}`)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="app-img md:flex md:justify-end h-full w-[40%]   hidden">
+            <img className="h-full" alt="app-img" src={iphone} />
           </div>
         </div>
       </div>
