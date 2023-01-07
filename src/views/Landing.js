@@ -6,6 +6,7 @@ import "../../src/swiper.css";
 import Input from "react-phone-number-input/input";
 
 import iphone from "../assets/icons/fig-iphone.png";
+import appIco from "../assets/icons/0.png";
 
 import food1 from "../assets/foods/4.jpg";
 import food2 from "../assets/foods/7.jpg";
@@ -21,6 +22,7 @@ const mobileAppAownload = [
   "4.png",
   "6.png",
 ];
+const relatedIco = ["facebook", "instagram", "in", "tellegram", "twitter"];
 
 const popularFoods = [
   { id: 1, name: "پیتزا" },
@@ -209,7 +211,7 @@ const Landing = () => {
         </form>
       </div>
 
-      <div className="body w-full bg-white flex flex-col items-center   h-fit py-4">
+      <div className="body w-full bg-white flex flex-col items-center   h-fit pt-4">
         <div className="content w-[85%] h-full">
           <div className="slider rounded-2xl w-[100%] md:h-[450px] h-[250px] mt-8">
             <Swiper
@@ -290,7 +292,7 @@ const Landing = () => {
               </div>
             </div>
           </div>
-          <div className="Discount text-right w-full h-fit mt-24">
+          <div className="best-seller text-right w-full h-fit mt-24">
             <p className="md:text-5xl text-3xl mb-6">پرفروش ترین ها</p>
             <div className="w-full h-full flex justify-center">
               <div className="w-[95%]  h-4/5 mt-4">
@@ -324,7 +326,7 @@ const Landing = () => {
               </div>
             </div>
           </div>
-          <div className="Discount text-right w-full h-fit mt-24">
+          <div className="newest text-right w-full h-fit mt-24">
             <p className="md:text-5xl text-3xl mb-6">جدید ترین ها</p>
             <div className="w-full h-full flex justify-center">
               <div className="w-[95%]  h-4/5 mt-4">
@@ -398,7 +400,89 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <div className="footer border border-gray-700 bg-gray-600 h-[300px]"></div>
+      <div className="footer border flex flex-col items-center border-gray-700 bg-gray-600 h-fit">
+        <hr className="mt-16 w-[90%] justify-center"></hr>
+        <div className="w-full h-full flex md:flex-row-reverse flex-col ">
+          <div className=" flex  flex-col items-end flex-1 h-full  p-4">
+            <div className="flex flex-row-reverse">
+              <img
+                className="w-10 h-10 rounded-full md:block hidden"
+                alt="app-ico"
+                src={appIco}
+              />
+              <ul className="flex flex-wrap justify-center mr-2">
+                <li className="text-white cursor-pointer m-2 hover:font-bold">
+                  وبلاگ دلینو
+                </li>
+                <li className="text-white cursor-pointer m-2 hover:font-bold">
+                  درباره
+                </li>
+                <li className="text-white cursor-pointer m-2 hover:font-bold">
+                  تماس با ما
+                </li>
+                <li className="text-white cursor-pointer m-2 hover:font-bold">
+                  قوانین
+                </li>
+                <li className="text-white cursor-pointer m-2 hover:font-bold">
+                  سوالات متداول
+                </li>
+                <li className="text-white cursor-pointer m-2 hover:font-bold">
+                  حریم شخصی
+                </li>
+                <li className="text-white cursor-pointer m-2 hover:font-bold">
+                  ثبت نام رستوران
+                </li>
+              </ul>
+            </div>
+            <p className=" mt-8 text-[#e3e3e3] text-right">
+              تمامی لوگوها و اطلاعات رستوران ها با احترام متعلق به مالکین
+              رستوران ها است و امتیاز استفاده از این اطلاعات تنها برای دلینو
+              مجاز است
+            </p>
+          </div>
+          <div className="flex-1 flex flex-col md:items-start items-center h-full p-4">
+            <ul className="flex gap-4 mt-3">
+              {relatedIco.map((item, index) => (
+                <div key={index}>
+                  <li className="" key={index}>
+                    <a href="#">
+                      {item === "facebook" ? (
+                        <img
+                          className="w-7 h-7 relative -top-1"
+                          alt={`${item}`}
+                          src={require(`../assets/icons/${item}.png`)}
+                        />
+                      ) : (
+                        <img
+                          className="w-5 h-5"
+                          alt={`${item}`}
+                          src={require(`../assets/icons/${item}.svg`)}
+                        />
+                      )}
+                    </a>
+                  </li>
+                </div>
+              ))}
+            </ul>
+            <div className="flex mt-20 gap-4">
+              <div className=" border border-[rgba(255,255,255,.1)] h-12 w-40">
+                <img
+                  className="w-full h-full cursor-pointer"
+                  alt="app-downlod"
+                  src={require(`../assets/mobile-app-download/0.png`)}
+                />
+              </div>
+              <div className=" border border-[rgba(255,255,255,.1)] h-12 w-40">
+                <img
+                  className="w-full h-full cursor-pointer"
+                  alt="app-downlod"
+                  src={require(`../assets/mobile-app-download/3.png`)}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
