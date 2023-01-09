@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Pagination } from "swiper";
+import { Link } from "react-router-dom";
+
 import "swiper/css";
 import "../../src/swiper.css";
 import Input from "react-phone-number-input/input";
@@ -240,9 +242,9 @@ const Landing = () => {
             <p className="md:text-5xl text-3xl">محبوب ترین ها</p>
             <div className="w-full h-full flex justify-center">
               <div className=" w-[95%] h-4/5 mt-8 grid md:grid-cols-5 grid-cols-2  gap-4">
-                {popularFoods.map((item, id) => (
+                {popularFoods.map((item, index) => (
                   <div
-                    key={id}
+                    key={index}
                     className="relative rounded-lg cursor-pointer h-32"
                   >
                     <img
@@ -274,17 +276,19 @@ const Landing = () => {
                   {foods.map((item, index) => (
                     <div key={index}>
                       <SwiperSlide key={index} className="rounded-lg ">
-                        <FoodCard
-                          imgSrc={{
-                            mainfood: require(`../assets/foods/discount/0.jpg`),
-                            lable: require(`../assets/storeLable/0.png`),
-                          }}
-                          name={item.foodName}
-                          Ncomment={item.Ncomment}
-                          discount={item.discount ? true : false}
-                          discountNum={item.discount}
-                          address={item.addres}
-                        />
+                        <Link to="/food" state={{ data: item }} key={index}>
+                          <FoodCard
+                            imgSrc={{
+                              mainfood: require(`../assets/foods/discount/0.jpg`),
+                              lable: require(`../assets/storeLable/0.png`),
+                            }}
+                            name={item.foodName}
+                            Ncomment={item.Ncomment}
+                            discount={item.discount ? true : false}
+                            discountNum={item.discount}
+                            address={item.addres}
+                          />
+                        </Link>
                       </SwiperSlide>
                     </div>
                   ))}

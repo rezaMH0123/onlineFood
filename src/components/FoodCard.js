@@ -50,7 +50,7 @@ const FoodCard = (props) => {
 
       <div
         style={{ boxShadow: "0 5px 10px rgb(56 60 71 / 10%)" }}
-        className="absolute top-32 left-2 z-30 bg-white h-10 w-20 rounded-xl"
+        className="absolute top-[55%] left-2 z-30 bg-white h-10 w-20 rounded-xl"
       >
         <span className="text-sm">
           45-25
