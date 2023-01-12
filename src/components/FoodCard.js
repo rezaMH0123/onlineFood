@@ -60,7 +60,7 @@ const FoodCard = (props) => {
       <>
         {discount ? (
           <div className="bg-red-500 rounded-full text-center flex justify-center items-center w-10 h-10 absolute top-2 left-3">
-            <span className="text-white text-sm">{discountNum}</span>
+            <span className="text-white text-sm">{discountNum}%</span>
           </div>
         ) : null}
       </>

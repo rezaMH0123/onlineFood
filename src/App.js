@@ -9,7 +9,7 @@ function App() {
     <FoodContextProvider>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/food" element={<SingleFood />} />
+        <Route path="/food/:id" element={<SingleFood />} />
       </Routes>
     </FoodContextProvider>
   );

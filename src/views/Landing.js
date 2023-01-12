@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 import { Link } from "react-router-dom";
@@ -15,6 +15,9 @@ import food2 from "../assets/foods/7.jpg";
 import food3 from "../assets/foods/8.jpg";
 import food4 from "../assets/foods/9.jpg";
 import FoodCard from "../components/FoodCard";
+
+import { FoodContext } from "../context/FoodContextProvider";
+import ShoppingCard from "../components/ShoppingCard";
 
 const mobileAppAownload = [
   "0.png",
@@ -38,50 +41,7 @@ const popularFoods = [
   { id: 9, name: "استیک" },
   { id: 10, name: "صبحانه" },
 ];
-const foods = [
-  {
-    id: 1,
-    foodName: "بستنی جلاتو",
-    addres: "طهران",
-    Ncomment: 60,
-    discount: "40%",
-  },
-  {
-    id: 2,
-    foodName: "همبرگر ذغالی",
-    addres: "جردن",
-    Ncomment: 680,
-    discount: "50%",
-  },
-  {
-    id: 3,
-    foodName: " دیزی",
-    addres: "ولیعصر",
-    Ncomment: 700,
-    discount: "70%",
-  },
-  {
-    id: 4,
-    foodName: " پیتزا",
-    addres: "یزد",
-    Ncomment: 325,
-    discount: "26%",
-  },
-  {
-    id: 5,
-    foodName: " کباب ",
-    addres: "اصفهان",
-    Ncomment: 310,
-    discount: "60%",
-  },
-  {
-    id: 6,
-    foodName: "فست فود عربی",
-    addres: "شیراز",
-    Ncomment: 270,
-    discount: "10%",
-  },
-];
+
 function useWindowSize() {
   const [size, setSize] = useState([0, 0]);
   useLayoutEffect(() => {
@@ -96,9 +56,14 @@ function useWindowSize() {
 }
 const Landing = () => {
   SwiperCore.use([Autoplay]);
-  const [width, height] = useWindowSize();
+  const [width] = useWindowSize();
+  const foodContext = useContext(FoodContext);
+  console.log(foodContext);
   const [value, setValue] = useState();
-
+  const [shoppingCartBool, setShoppingCardBool] = useState(false);
+  window.addEventListener("scroll", () => {
+    setShoppingCardBool(false);
+  });
   return (
     <div className="w-full">
       <div className="header bg-white h-[330px] ">
@@ -106,6 +71,7 @@ const Landing = () => {
           <div className="flex-1 flex items-center pl-2">
             <div className=" cursor-pointer bg-[#ff0000]  md:w-20 md:h-12 w-12 h-8 rounded-md  md:ml-4">
               <img
+                onClick={() => setShoppingCardBool((prev) => !prev)}
                 alt="shopingCart"
                 className="md:w-18 md:h-10 w-16 h-9 relative top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-2 md:p-1"
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC8UlEQVR4nO2bv2sUQRTH32miCBpBAxIRkYBBawsNioWFP5o0aq9WNooRNFr4Aws9wfijsFBzAQsb/wJBbSyEWEkURNCEROHAaKFIMIp+ZHDu8m7NWdzMujuZ/cDCMnvMm/fl3cx7M7siBQUFBQV/AHqAE8BA4jJtPTLfAd7SnDcSuQDIfAdYD5wByuqKR4C5KARoZCCw6xDQJR4FCJHvwHmgFKsANS76EKAc0HUZeKLG/qOlXAaFBAawAHigXDgZlQAG4Khy4YZEKMCwcuFUVAIA7cAn5cKW2ATYo4Y/2dJSSNgC6PC/0mondSTs8N8cmwC7ncM/cAEqauiDLh3VkbDC/6PT7F8jUAH8hH/AAvgJ/xAF8Br+gQqwSw35nVP4ByrAkBryVR8d1pGcA7QBH2ZHTG9sAuz0Gv4BCnDHa/iHJEAq4R+YAP7D3wDM2E5nJMcAt5UA1312XAa+Apck3+E/pQTYKjFBY/i/N7vBEhPAIyXANYkJ4KBy/hewUWIAWAKcBn4qASppGiwB24H+jE98LwD3gapeooFRoCMt57uBZ+SXp8CqtJzvBCbIJ5P26KstFecNZkdFGfxmy80sT33PAYfNNjewUNIGGFcC7JXYYDYVNiyV2KAxAvZJbPD3HFD5D0vdEbOZmYuUlmxXgRfAtqw1EJsHjGQkgpmD+rLWQBKZYNpL3T3gixLB3K+WmADWAWPO5/shA/QpAV7l6S/Qb+9LKdtcbktcw3Satlothkxbt3gAWAscT77MCDy2th76sJPGMjhhfuNoY4VKuMYTzxYDm4BFzs54LIaG7L2XCcq8x6v6qkqeoEkxZNJi1T7maOOl6utA4tlZuyt908WG92IIWKYjw9GGPs/vSrzr+9m2m8mw3dUfb8UQsN9jBIzOFQGJV12mXH3xWQwNe54DzAcN+gOHu/akZ1q13/Lnlf9VYKWjjQ7g9T9sVDNNhWleDI14zAPWJD5wqPEc2ODDRhCZINALHLNJ0Y609wR+AxbcVTfLs9cUAAAAAElFTkSuQmCC"
@@ -212,6 +178,16 @@ const Landing = () => {
           </div>
         </form>
       </div>
+      {shoppingCartBool ? (
+        <div
+          style={{ transition: "all 500ms" }}
+          className="fixed top-[13.5%] left-0 w-64 h-full border border-gray-200 bg-white z-40"
+        >
+          <ShoppingCard foodCount={foodContext.countOfBuy} />
+        </div>
+      ) : (
+        <div className=" w-0"></div>
+      )}
 
       <div className="body w-full bg-white flex flex-col items-center   h-fit pt-4">
         <div className="content w-[85%] h-full">
@@ -273,10 +249,14 @@ const Landing = () => {
                   modules={[Pagination]}
                   className="mySwiper flex flex-row-reverse rounded-lg"
                 >
-                  {foods.map((item, index) => (
+                  {foodContext.foods.map((item, index) => (
                     <div key={index}>
                       <SwiperSlide key={index} className="rounded-lg ">
-                        <Link to="/food" state={{ data: item }} key={index}>
+                        <Link
+                          to={`/food/${item.id}`}
+                          state={{ data: item }}
+                          key={index}
+                        >
                           <FoodCard
                             imgSrc={{
                               mainfood: require(`../assets/foods/discount/0.jpg`),
@@ -309,20 +289,26 @@ const Landing = () => {
                   modules={[Pagination]}
                   className="mySwiper flex flex-row-reverse rounded-lg"
                 >
-                  {foods.map((item, index) => (
+                  {foodContext.foods.map((item, index) => (
                     <div key={index}>
                       <SwiperSlide key={index} className="rounded-lg ">
-                        <FoodCard
-                          imgSrc={{
-                            mainfood: require(`../assets/foods/discount/0.jpg`),
-                            lable: require(`../assets/storeLable/0.png`),
-                          }}
-                          name={item.foodName}
-                          Ncomment={item.Ncomment}
-                          discount={item.discount ? true : false}
-                          discountNum={item.discount}
-                          address={item.addres}
-                        />
+                        <Link
+                          to={`/food/${item.id}`}
+                          state={{ data: item }}
+                          key={index}
+                        >
+                          <FoodCard
+                            imgSrc={{
+                              mainfood: require(`../assets/foods/discount/0.jpg`),
+                              lable: require(`../assets/storeLable/0.png`),
+                            }}
+                            name={item.foodName}
+                            Ncomment={item.Ncomment}
+                            discount={item.discount ? true : false}
+                            discountNum={item.discount}
+                            address={item.addres}
+                          />
+                        </Link>
                       </SwiperSlide>
                     </div>
                   ))}
@@ -343,20 +329,26 @@ const Landing = () => {
                   modules={[Pagination]}
                   className="mySwiper flex flex-row-reverse rounded-lg"
                 >
-                  {foods.map((item, index) => (
+                  {foodContext.foods.map((item, index) => (
                     <div key={index}>
                       <SwiperSlide key={index} className="rounded-lg ">
-                        <FoodCard
-                          imgSrc={{
-                            mainfood: require(`../assets/foods/discount/0.jpg`),
-                            lable: require(`../assets/storeLable/0.png`),
-                          }}
-                          name={item.foodName}
-                          Ncomment={item.Ncomment}
-                          discount={item.discount ? true : false}
-                          discountNum={item.discount}
-                          address={item.addres}
-                        />
+                        <Link
+                          to={`/food/${item.id}`}
+                          state={{ data: item }}
+                          key={index}
+                        >
+                          <FoodCard
+                            imgSrc={{
+                              mainfood: require(`../assets/foods/discount/0.jpg`),
+                              lable: require(`../assets/storeLable/0.png`),
+                            }}
+                            name={item.foodName}
+                            Ncomment={item.Ncomment}
+                            discount={item.discount ? true : false}
+                            discountNum={item.discount}
+                            address={item.addres}
+                          />
+                        </Link>
                       </SwiperSlide>
                     </div>
                   ))}
@@ -388,8 +380,11 @@ const Landing = () => {
             </form>
             <div className=" md:w-[55%] w-[70%] mt-10 flex justify-center h-fit">
               <div className="w-fit grid   md:grid-cols-3 grid-cols-2 gap-3 ">
-                {mobileAppAownload.map((item) => (
-                  <div className="bg-black h-10 w-28 rounded-md cursor-pointer">
+                {mobileAppAownload.map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-black h-10 w-28 rounded-md cursor-pointer"
+                  >
                     <img
                       alt="app-downlod"
                       src={require(`../assets/mobile-app-download/${item}`)}
@@ -409,11 +404,14 @@ const Landing = () => {
         <div className="w-full h-full flex md:flex-row-reverse flex-col ">
           <div className=" flex  flex-col items-end flex-1 h-full  p-4">
             <div className="flex flex-row-reverse">
-              <img
-                className="w-10 h-10 rounded-full md:block hidden"
-                alt="app-ico"
-                src={appIco}
-              />
+              <div className="img w-10 h-10 rounded-full md:block hidden">
+                <img
+                  className="w-full h-full rounded-full"
+                  alt="app-ico"
+                  src={appIco}
+                />
+              </div>
+
               <ul className="flex flex-wrap justify-center mr-2">
                 <li className="text-white cursor-pointer m-2 hover:font-bold">
                   وبلاگ دلینو
