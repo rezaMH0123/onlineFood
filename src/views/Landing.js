@@ -58,7 +58,6 @@ const Landing = () => {
   SwiperCore.use([Autoplay]);
   const [width] = useWindowSize();
   const foodContext = useContext(FoodContext);
-  console.log(foodContext);
   const [value, setValue] = useState();
   const [shoppingCartBool, setShoppingCardBool] = useState(false);
   window.addEventListener("scroll", () => {
@@ -447,7 +446,7 @@ const Landing = () => {
               {relatedIco.map((item, index) => (
                 <div key={index}>
                   <li className="" key={index}>
-                    <a href="#">
+                    <a href="/#">
                       {item === "facebook" ? (
                         <img
                           className="w-7 h-7 relative -top-1"

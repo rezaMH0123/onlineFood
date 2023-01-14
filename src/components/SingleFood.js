@@ -108,7 +108,7 @@ const SingleFood = () => {
           <div className="img w-full h-[45%]  rounded-lg">
             <img
               className="h-full w-full rounded-t-lg"
-              alt={`${food.id}-food`}
+              alt="img"
               src={require("../assets/foods/discount/0.jpg")}
             />
           </div>
@@ -147,6 +147,7 @@ const SingleFood = () => {
                   className="addition flex justify-center items-center cursor-pointer rounded-md bg-red-500 border border-red-500 w-8 h-8"
                 >
                   <img
+                    alt="img"
                     className="w=[70%] h-[70%]"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAdklEQVR4nO3UQQrCMBBA0RzPuBDvv2hA60Iv8boRtF2I0E6oOA+yzYdJmFLSnuGMB+449QzfvIw9wzMZDmMhrrSQ4fKzo8YRzfYa6qfwRZxxl+GKISA64LDFX5hZfeG3Mlx6kW/8D6Nu78uhZ7ji+jzrN1IqgSYK2LXvCFcYxQAAAABJRU5ErkJggg=="
                   />
@@ -157,6 +158,7 @@ const SingleFood = () => {
                   className="minus flex justify-center items-center cursor-pointer rounded-md bg-red-500 border border-red-500 w-8 h-8"
                 >
                   <img
+                    alt="img"
                     className="w=[70%] h-[70%]"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAZUlEQVR4nO3RQRHAIBAAsfPvmaEO+l0GEguZAQAAAAAAAAAAAAAAAAB4wubPEtASEBMQExATEBMQExATEBMQExATEBMQExATEBMQExATEBMQE3B9AAAAAAAAAAAAAAAAAADAnOAD+Elqo9OChN4AAAAASUVORK5CYII="
                   />
@@ -171,7 +173,6 @@ const SingleFood = () => {
             className="absolute top-0 left-0 w-80 h-full border border-gray-200 bg-white"
           >
             <ShoppingCard
-              foodCount={foodContext.countOfBuy}
               singleFood={{ food: food, countOfBuy: foodContext.countOfBuy }}
             />
           </div>

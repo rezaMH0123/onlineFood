@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import cardEmpty from "../assets/icons/fig-cart-empty.png";
 import { FoodContext } from "../context/FoodContextProvider";
 export default function ShoppingCard({ singleFood }) {
@@ -20,7 +20,50 @@ export default function ShoppingCard({ singleFood }) {
     const totalPrice = Prices.reduce((total, price) => total + price, 0);
     return totalPrice;
   };
-
+  const buyFoodOnclick = (props) => {
+    if (props.do === "add") {
+      foodContext.buyFood.map(() => {
+        foodContext.setBuyFood((current) =>
+          current.map((obj) => {
+            if (obj.foodName === props.foodName) {
+              return { ...obj, count: props.count + 1 };
+            }
+            return obj;
+          })
+        );
+      });
+    } else {
+      console.log(props.count);
+      if (props.count - 1 !== 0) {
+        foodContext.buyFood.map(() => {
+          foodContext.setBuyFood((current) =>
+            current.map((obj) => {
+              if (obj.foodName === props.foodName) {
+                return { ...obj, count: props.count - 1 };
+              }
+              return obj;
+            })
+          );
+        });
+      } else {
+        const filterFood = foodContext.buyFood.filter(
+          (item) => item.foodName !== props.foodName
+        );
+        foodContext.setBuyFood([...filterFood]);
+      }
+    }
+  };
+  useEffect(() => {
+    var totalCount = 0;
+    if (foodContext.buyFood.length > 0) {
+      foodContext.buyFood.map((item) => {
+        totalCount += item.count;
+        foodContext.setTotalCount(totalCount);
+      });
+    } else {
+      foodContext.setTotalCount(0);
+    }
+  }, [foodContext.buyFood]);
   return (
     <div className="w-full h-fit">
       {foodContext.buyFood == 0 ? (
@@ -46,15 +89,35 @@ export default function ShoppingCard({ singleFood }) {
                   </div>
                 </div>
                 <div className="w-2/6 flex justify-center gap-2 items-center ">
-                  <div className="plus border flex justify-center items-center border-red-500 rounded-full w-6 h-6 cursor-pointer">
+                  <div
+                    onClick={() =>
+                      buyFoodOnclick({
+                        do: "minus",
+                        foodName: item.foodName,
+                        count: item.count,
+                      })
+                    }
+                    className="minus border flex justify-center items-center border-red-500 rounded-full w-6 h-6 cursor-pointer"
+                  >
                     <img
+                      alt="img"
                       className="w-full"
                       src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAKklEQVR4nO3OsQkAMAwEsZ/R+0+SJpnCwQYJrr8EAJjoVN2O9gwAAPnoAVTncv0aWtuxAAAAAElFTkSuQmCC"
                     />
                   </div>
                   <span>{item.count}</span>
-                  <div className="minus border flex justify-center items-center border-red-500 rounded-full w-6 h-6 cursor-pointer">
+                  <div
+                    onClick={() =>
+                      buyFoodOnclick({
+                        do: "add",
+                        foodName: item.foodName,
+                        count: item.count,
+                      })
+                    }
+                    className="plus border flex justify-center items-center border-red-500 rounded-full w-6 h-6 cursor-pointer"
+                  >
                     <img
+                      alt="img"
                       className="w-[90%]"
                       src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAASUlEQVR4nO2WwQkAIAwDM2P2nySfiuAAPioi3kG/pdAkRAJ4mdg1hwPEC24RRGhs6DNBlLW4e945YBdEGGxogsg0ovq7EwKogQFNoNuFGh/nywAAAABJRU5ErkJggg=="
                     />
