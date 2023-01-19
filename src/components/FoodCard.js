@@ -3,7 +3,7 @@ const FoodCard = (props) => {
   return (
     <div
       style={{ boxShadow: "0 14px 20px rgb(56 60 71 / 10%)" }}
-      className="border border-gray-200 relative cursor-pointer w-[90%] h-[95%] rounded-lg"
+      className="border border-gray-200 relative cursor-pointer w-full h-full rounded-lg"
     >
       <div className="topCard relative h-3/5 rounded-t-lg">
         <img className="rounded-t-lg z-10" alt="food" src={imgSrc.mainfood} />

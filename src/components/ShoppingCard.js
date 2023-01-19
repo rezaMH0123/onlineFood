@@ -33,7 +33,6 @@ export default function ShoppingCard({ singleFood }) {
         );
       });
     } else {
-      console.log(props.count);
       if (props.count - 1 !== 0) {
         foodContext.buyFood.map(() => {
           foodContext.setBuyFood((current) =>
@@ -74,7 +73,7 @@ export default function ShoppingCard({ singleFood }) {
           </span>
         </div>
       ) : (
-        <div className="w-full h-fit mt-4">
+        <div className="w-full h-fit ">
           <div className="w-full h-fit">
             {foodContext.buyFood.map((item, index) => (
               <div
