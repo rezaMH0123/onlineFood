@@ -66,7 +66,7 @@ const SignIn = () => {
     <div className="text-center flex justify-center items-center bg-gray-200 h-screen">
       <form
         onSubmit={submitHndler}
-        className="border border-gray-400 rounded-lg w-fit bg-white h-fit p-14"
+        className="border border-gray-400 md:w-[45%] w-full rounded-lg h-fit p-16 bg-white "
       >
         <h2 className="font-bold text-right text-4xl text-blue-500  mb-6">
           ورود

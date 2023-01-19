@@ -65,18 +65,21 @@ const Landing = () => {
   });
   return (
     <div className="h-screen relative">
-      {foodContext.lodding ? (
+      {true ? (
         <div className="w-full">
           <div className="header bg-white h-[330px] ">
             <div className="main-header border-b border-gray-200 flex bg-white h-[100px] fixed top-0 left-0 right-0 z-20">
               <div className="flex-1 flex items-center pl-2">
-                <div className=" cursor-pointer bg-[#ff0000]  md:w-20 md:h-12 w-12 h-8 rounded-md  md:ml-4">
+                <div className=" relative cursor-pointer bg-[#ff0000]  md:w-20 md:h-12 w-12 h-8 rounded-md  md:ml-4">
                   <img
                     onClick={() => setShoppingCardBool((prev) => !prev)}
                     alt="shopingCart"
                     className="md:w-18 md:h-10 w-16 h-9 relative top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-2 md:p-1"
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAC8UlEQVR4nO2bv2sUQRTH32miCBpBAxIRkYBBawsNioWFP5o0aq9WNooRNFr4Aws9wfijsFBzAQsb/wJBbSyEWEkURNCEROHAaKFIMIp+ZHDu8m7NWdzMujuZ/cDCMnvMm/fl3cx7M7siBQUFBQV/AHqAE8BA4jJtPTLfAd7SnDcSuQDIfAdYD5wByuqKR4C5KARoZCCw6xDQJR4FCJHvwHmgFKsANS76EKAc0HUZeKLG/qOlXAaFBAawAHigXDgZlQAG4Khy4YZEKMCwcuFUVAIA7cAn5cKW2ATYo4Y/2dJSSNgC6PC/0mondSTs8N8cmwC7ncM/cAEqauiDLh3VkbDC/6PT7F8jUAH8hH/AAvgJ/xAF8Br+gQqwSw35nVP4ByrAkBryVR8d1pGcA7QBH2ZHTG9sAuz0Gv4BCnDHa/iHJEAq4R+YAP7D3wDM2E5nJMcAt5UA1312XAa+Apck3+E/pQTYKjFBY/i/N7vBEhPAIyXANYkJ4KBy/hewUWIAWAKcBn4qASppGiwB24H+jE98LwD3gapeooFRoCMt57uBZ+SXp8CqtJzvBCbIJ5P26KstFecNZkdFGfxmy80sT33PAYfNNjewUNIGGFcC7JXYYDYVNiyV2KAxAvZJbPD3HFD5D0vdEbOZmYuUlmxXgRfAtqw1EJsHjGQkgpmD+rLWQBKZYNpL3T3gixLB3K+WmADWAWPO5/shA/QpAV7l6S/Qb+9LKdtcbktcw3Satlothkxbt3gAWAscT77MCDy2th76sJPGMjhhfuNoY4VKuMYTzxYDm4BFzs54LIaG7L2XCcq8x6v6qkqeoEkxZNJi1T7maOOl6utA4tlZuyt908WG92IIWKYjw9GGPs/vSrzr+9m2m8mw3dUfb8UQsN9jBIzOFQGJV12mXH3xWQwNe54DzAcN+gOHu/akZ1q13/Lnlf9VYKWjjQ7g9T9sVDNNhWleDI14zAPWJD5wqPEc2ODDRhCZINALHLNJ0Y609wR+AxbcVTfLs9cUAAAAAElFTkSuQmCC"
                   />
+                  <div className="w-4 h-4  rounded-full relative md:-top-[10%] md:left-[85%] -top-[40%] left-[80%]  flex justify-center items-center bg-red-600 text-white">
+                    {foodContext.totalCount}
+                  </div>
                 </div>
               </div>
               <div className="flex-1 flex items-center justify-center ">
@@ -182,7 +185,7 @@ const Landing = () => {
           {shoppingCartBool ? (
             <div
               style={{ transition: "all 500ms" }}
-              className="fixed top-[13.5%] left-0 w-64 h-full border border-gray-200 bg-white z-40"
+              className="fixed top-[13.5%] left-0 md:w-64 w-full h-full border border-gray-200 bg-white z-40"
             >
               <ShoppingCard foodCount={foodContext.countOfBuy} />
             </div>
@@ -489,7 +492,7 @@ const Landing = () => {
           </div>
         </div>
       ) : (
-        <div className="bgLodding  flex justify-center items-center">
+        <div className="bgLodding flex justify-center items-center">
           <img className="z-50  w-32 h-32" alt="lodding" src={lodding} />
         </div>
       )}

@@ -73,7 +73,7 @@ export default function ShoppingCard({ singleFood }) {
           </span>
         </div>
       ) : (
-        <div className="w-full h-fit ">
+        <div className="w-full h-fit md:mt-0  mt-16">
           <div className="w-full h-fit">
             {foodContext.buyFood.map((item, index) => (
               <div

@@ -112,27 +112,29 @@ const SingleFood = () => {
               src={require("../assets/foods/discount/0.jpg")}
             />
           </div>
-          <div className="text-right mt-4 mr-2 flex flex-row-reverse justify-between">
-            <h1 className="text-2xl">{food.foodName}</h1>
-            <span className="ml-3 text-xl text-red-700 font-bold flex flex-row-reverse gap-1">
-              {`${food.price}`}
-              <p>تومان</p>
-            </span>
+          <div className=" w-full h-[45%]">
+            <div className="text-right mt-4 mr-2 flex flex-row-reverse justify-between">
+              <h1 className="text-2xl">{food.foodName}</h1>
+              <span className="ml-3 text-xl text-red-700 font-bold flex flex-row-reverse gap-1">
+                {`${food.price}`}
+                <p>تومان</p>
+              </span>
+            </div>
+            <div className="information text-right p-4">
+              <p className="text">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
+                در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
+                نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد
+              </p>
+            </div>
+            <div className=" w-fit ml-4 p-3 rounded-md  flex flex-row-reverse">
+              <span className="inline-block px-2">زمان احتمالی آماده شدن</span>
+              <p>45-25</p>
+              <p className="px-2">دقیقه</p>
+            </div>
           </div>
-          <div className="information text-right p-4">
-            <p className="text">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
-              در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
-              نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد
-            </p>
-          </div>
-          <div className="border w-fit ml-4 p-3 rounded-md border-red-600 flex flex-row-reverse">
-            <span className="inline-block px-2">زمان احتمالی آماده شدن</span>
-            <p>45-25</p>
-            <p className="px-2">دقیقه</p>
-          </div>
-          <div className="flex absolute bottom-5 right-2 justify-end mr-4 cursor-pointer">
+          <div className="flex justify-end mr-4 cursor-pointer ">
             {countOfBuy === 0 ? (
               <div
                 onClick={firstBuyOnclick}
@@ -170,7 +172,7 @@ const SingleFood = () => {
         {shoppingCartBool ? (
           <div
             style={{ transition: "all 400ms" }}
-            className="absolute top-0 left-0 w-80 h-full border border-gray-200 bg-white"
+            className="absolute top-0 left-0 md:w-80 w-full h-full border border-gray-200 bg-white"
           >
             <ShoppingCard
               singleFood={{ food: food, countOfBuy: foodContext.countOfBuy }}

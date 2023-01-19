@@ -2,15 +2,15 @@ import React from "react";
 
 const SignFild = (props) => {
   return (
-    <div className="flex flex-col p-2 m-2 h-24 w-fit">
-      <label className="text-right text-lg from-neutral-700">
+    <div className="flex flex-col p-2 m-2 h-24 w-full">
+      <label className="text-right text-lg from-neutral-700 mb-2">
         {props.lablename}
       </label>
       <input
         className={
           props.touch[props.name] == true && props.errors[props.name]
-            ? `border border-red-500 px-1 focus:outline-none focus:border-2 focus:border-[#1a73e8]  rounded-md w-[300px] h-[40px]  transition-timing-function: cubic-bezier(0.4, 0, 1, 1) duration-200`
-            : `border border-gray-300 px-1 focus:outline-none focus:border-2 focus:border-[#1a73e8]  rounded-md w-[300px] h-[40px]  transition-timing-function: cubic-bezier(0.4, 0, 1, 1) duration-200`
+            ? `border border-red-500 px-1 focus:outline-none focus:border-2 focus:border-[#1a73e8]  rounded-md w-full h-[40px]  transition-timing-function: cubic-bezier(0.4, 0, 1, 1) duration-200`
+            : `border border-gray-300 px-1 focus:outline-none focus:border-2 focus:border-[#1a73e8]  rounded-md w-full h-[40px]  transition-timing-function: cubic-bezier(0.4, 0, 1, 1) duration-200`
         }
         type={props.type}
         name={props.name}
