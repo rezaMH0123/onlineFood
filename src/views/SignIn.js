@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import SignFild from "../components/SignFild";
 import validate from "../components/validate";
+import { postUserSignin } from "../api/userapi";
 const SignIn = () => {
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -24,8 +27,18 @@ const SignIn = () => {
         draggable: true,
         progress: undefined,
       });
-    } else {
+    } else if (type == "error") {
       toast.error("Please fill in all the blanks", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.warn("user with this email address already exists", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -38,19 +51,21 @@ const SignIn = () => {
   };
 
   const changeHandler = (event) => {
-    if (event.target.name === "isAccepted") {
-      setData({ ...data, [event.target.name]: event.target.checked });
-    } else {
-      setData({ ...data, [event.target.name]: event.target.value });
-    }
+    setData({ ...data, [event.target.name]: event.target.value });
   };
   const focusHandler = (event) => {
     setTouch({ ...touch, [event.target.name]: true });
   };
-  const submitHndler = (event) => {
+  const submitHndler = async (event) => {
     event.preventDefault();
     if (!Object.keys(errors).length) {
+      const token = await postUserSignin(data);
+      console.log(token);
       notify("success");
+      setTimeout(function () {
+        localStorage.setItem("userToken", JSON.stringify(token));
+        navigate("/");
+      }, 2000);
     } else {
       setTouch({
         email: true,
@@ -66,7 +81,7 @@ const SignIn = () => {
     <div className="text-center flex justify-center items-center bg-gray-200 h-screen">
       <form
         onSubmit={submitHndler}
-        className="border border-gray-400 md:w-[45%] w-full rounded-lg h-fit p-16 bg-white "
+        className="border border-gray-400 md:w-[30%] w-full rounded-lg h-fit p-16 bg-white "
       >
         <h2 className="font-bold text-right text-4xl text-blue-500  mb-6">
           ورود
@@ -84,7 +99,7 @@ const SignIn = () => {
         <SignFild
           type="password"
           name="password"
-          lablename="رمز وزود"
+          lablename="رمز ورود"
           value={data.password}
           onchange={changeHandler}
           errors={errors}

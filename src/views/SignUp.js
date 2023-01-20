@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { postUser } from "../api/userapi";
 
 import SignFild from "../components/SignFild";
 import validate from "../components/validate";
 const SignUp = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    isAccepted: false,
   });
   const [errors, setErrors] = useState({});
   const [touch, setTouch] = useState({});
@@ -27,7 +28,17 @@ const SignUp = () => {
         draggable: true,
         progress: undefined,
       });
-    } else {
+    } else if (type == "warn") {
+      toast.warn("user with this email address already exists", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if ((type = "error")) {
       toast.error("Please fill in all the blanks", {
         position: "top-right",
         autoClose: 2000,
@@ -41,19 +52,28 @@ const SignUp = () => {
   };
 
   const changeHandler = (event) => {
-    if (event.target.name === "isAccepted") {
-      setData({ ...data, [event.target.name]: event.target.checked });
-    } else {
-      setData({ ...data, [event.target.name]: event.target.value });
-    }
+    setData({ ...data, [event.target.name]: event.target.value });
   };
   const focusHandler = (event) => {
     setTouch({ ...touch, [event.target.name]: true });
   };
-  const submitHndler = (event) => {
+  const submitHndler = async (event) => {
     event.preventDefault();
-    if (!Object.keys(errors).length) {
-      notify("success");
+    if (Object.keys(errors).length < 2) {
+      const user = await postUser({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
+      if (user.name) {
+        notify("success");
+        setTimeout(function () {
+          navigate("/signin");
+        }, 2000);
+      } else {
+        console.log(Object.keys(errors).length);
+        notify("warn");
+      }
     } else {
       setTouch({
         name: true,
@@ -72,7 +92,7 @@ const SignUp = () => {
     <div className=" text-center flex justify-center items-center bg-gray-200 h-screen">
       <form
         onSubmit={submitHndler}
-        className=" border border-gray-400 md:w-[45%] w-full rounded-lg h-fit p-16 bg-white"
+        className=" border border-gray-400 md:w-[30%]  w-full rounded-lg md:h-fit h-full p-16 bg-white"
       >
         <h2 className="font-bold text-right text-4xl text-blue-500  mb-6">
           ثبت نام
