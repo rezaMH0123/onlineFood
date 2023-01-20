@@ -5,8 +5,12 @@ const FoodCard = (props) => {
       style={{ boxShadow: "0 14px 20px rgb(56 60 71 / 10%)" }}
       className="border border-gray-200 relative cursor-pointer w-full h-full rounded-lg"
     >
-      <div className="topCard relative h-3/5 rounded-t-lg">
-        <img className="rounded-t-lg z-10" alt="food" src={imgSrc.mainfood} />
+      <div className="topCard w-[100%] h-[60%] relative  rounded-t-lg">
+        <img
+          className="rounded-t-lg z-10 w-full h-full"
+          alt="food"
+          src={imgSrc.mainfood}
+        />
         <div className="storeLable bg-white rounded-xl w-12 h-16 absolute bottom-4 right-2 z-20">
           <img
             className="w-full h-full rounded-xl"
@@ -15,7 +19,7 @@ const FoodCard = (props) => {
           />
         </div>
       </div>
-      <div className="bottomCard h-2/5">
+      <div className="bottomCard h-[40%]">
         <div className="foodName  text-right p-2">
           <p className="font-bold">{name}</p>
         </div>

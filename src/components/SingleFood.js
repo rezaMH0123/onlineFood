@@ -109,10 +109,10 @@ const SingleFood = () => {
             <img
               className="h-full w-full rounded-t-lg"
               alt="img"
-              src={require("../assets/foods/discount/0.jpg")}
+              src={food.picture}
             />
           </div>
-          <div className=" w-full h-[45%]">
+          <div className=" w-full h-[40%]">
             <div className="text-right mt-4 mr-2 flex flex-row-reverse justify-between">
               <h1 className="text-2xl">{food.foodName}</h1>
               <span className="ml-3 text-xl text-red-700 font-bold flex flex-row-reverse gap-1">
@@ -134,11 +134,11 @@ const SingleFood = () => {
               <p className="px-2">دقیقه</p>
             </div>
           </div>
-          <div className="flex justify-end mr-4 cursor-pointer ">
+          <div className="flex justify-end mr-4 cursor-pointer borde h-[10%] ">
             {countOfBuy === 0 ? (
               <div
                 onClick={firstBuyOnclick}
-                className="bg-red-500 p-4 rounded-md w-fit text-white"
+                className="bg-red-500 p-4 rounded-md w-fit h-fit text-white text-lg"
               >
                 خرید
               </div>

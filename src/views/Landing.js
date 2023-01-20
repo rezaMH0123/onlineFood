@@ -63,6 +63,7 @@ const Landing = () => {
   window.addEventListener("scroll", () => {
     setShoppingCardBool(false);
   });
+  // console.log(foodContext.foods);
   return (
     <div className="h-screen relative">
       {true ? (
@@ -97,12 +98,16 @@ const Landing = () => {
                 </div>
               </div>
               <div className="flex flex-row-reverse items-center h-full flex-1">
-                <div className="flex justify-center items-center border md:mr-4 mr-2 cursor-pointer text-center  border-red-500 rounded-md h-fit md:p-3 p-1 md:text-3xl text-xl text-red-600">
-                  <p>ورود</p>
-                </div>
-                <div className="text-3xl mr-2 cursor-pointer hidden md:block ">
-                  ثبت نام
-                </div>
+                <Link to={`/signin`}>
+                  <div className="flex justify-center items-center border md:mr-4 mr-2 cursor-pointer text-center  border-red-500 rounded-md h-fit md:p-3 p-1 md:text-3xl text-xl text-red-600">
+                    <p>ورود</p>
+                  </div>
+                </Link>
+                <Link to={`/signup`}>
+                  <div className="text-3xl mr-2 cursor-pointer hidden md:block ">
+                    ثبت نام
+                  </div>
+                </Link>
               </div>
             </div>
             <div className="address flex justify-center items-center relative top-[100px] h-[70px]">
@@ -245,7 +250,7 @@ const Landing = () => {
                 <div className="w-full h-full flex justify-center">
                   <div className="w-[100%]  h-4/5 mt-4">
                     <Swiper
-                      slidesPerView={width < 400 ? 1 : width < 720 ? 2 : 3}
+                      slidesPerView={width < 400 ? 1 : width < 720 ? 2 : 4}
                       spaceBetween={25}
                       pagination={{
                         clickable: true,
@@ -255,25 +260,29 @@ const Landing = () => {
                     >
                       {foodContext.foods.map((item, index) => (
                         <div key={index}>
-                          <SwiperSlide key={index} className="rounded-lg ">
-                            <Link
-                              to={`/food/${item.id}`}
-                              state={{ data: item }}
-                              key={index}
-                            >
-                              <FoodCard
-                                imgSrc={{
-                                  mainfood: require(`../assets/foods/discount/0.jpg`),
-                                  lable: require(`../assets/storeLable/0.png`),
-                                }}
-                                name={item.foodName}
-                                Ncomment={item.Ncomment}
-                                discount={item.discount ? true : false}
-                                discountNum={item.discount}
-                                address={item.addres}
-                              />
-                            </Link>
-                          </SwiperSlide>
+                          {item.discount ? (
+                            <SwiperSlide key={index}>
+                              <Link
+                                style={{ height: "300px" }}
+                                className="rounded-lg w-[400px]"
+                                to={`/food/${item.id}`}
+                                state={{ data: item }}
+                                key={index}
+                              >
+                                <FoodCard
+                                  imgSrc={{
+                                    mainfood: item.picture,
+                                    lable: require(`../assets/storeLable/0.png`),
+                                  }}
+                                  name={item.foodName}
+                                  Ncomment={item.Ncomment}
+                                  discount={item.discount ? true : false}
+                                  discountNum={item.discount}
+                                  address={item.addres}
+                                />
+                              </Link>
+                            </SwiperSlide>
+                          ) : null}
                         </div>
                       ))}
                     </Swiper>
@@ -281,9 +290,9 @@ const Landing = () => {
                 </div>
               </div>
               <div className="best-seller text-right w-full h-fit mt-24">
-                <p className="md:text-5xl text-3xl mb-6">پرفروش ترین ها</p>
+                <p className="md:text-5xl text-3xl mb-6">پربازدید ترین ها</p>
                 <div className="w-full h-full flex justify-center">
-                  <div className="w-[95%]  h-4/5 mt-4">
+                  <div className="w-[100%]  h-4/5 mt-4">
                     <Swiper
                       slidesPerView={width < 400 ? 1 : width < 720 ? 2 : 3}
                       spaceBetween={25}
@@ -295,25 +304,29 @@ const Landing = () => {
                     >
                       {foodContext.foods.map((item, index) => (
                         <div key={index}>
-                          <SwiperSlide key={index} className="rounded-lg ">
-                            <Link
-                              to={`/food/${item.id}`}
-                              state={{ data: item }}
-                              key={index}
-                            >
-                              <FoodCard
-                                imgSrc={{
-                                  mainfood: require(`../assets/foods/discount/0.jpg`),
-                                  lable: require(`../assets/storeLable/0.png`),
-                                }}
-                                name={item.foodName}
-                                Ncomment={item.Ncomment}
-                                discount={item.discount ? true : false}
-                                discountNum={item.discount}
-                                address={item.addres}
-                              />
-                            </Link>
-                          </SwiperSlide>
+                          {item.Ncomment > 700 ? (
+                            <SwiperSlide key={index}>
+                              <Link
+                                style={{ height: "300px" }}
+                                className="rounded-lg w-[400px]"
+                                to={`/food/${item.id}`}
+                                state={{ data: item }}
+                                key={index}
+                              >
+                                <FoodCard
+                                  imgSrc={{
+                                    mainfood: item.picture,
+                                    lable: require(`../assets/storeLable/0.png`),
+                                  }}
+                                  name={item.foodName}
+                                  Ncomment={item.Ncomment}
+                                  discount={item.discount ? true : false}
+                                  discountNum={item.discount}
+                                  address={item.addres}
+                                />
+                              </Link>
+                            </SwiperSlide>
+                          ) : null}
                         </div>
                       ))}
                     </Swiper>
@@ -323,7 +336,7 @@ const Landing = () => {
               <div className="newest text-right w-full h-fit mt-24">
                 <p className="md:text-5xl text-3xl mb-6">جدید ترین ها</p>
                 <div className="w-full h-full flex justify-center">
-                  <div className="w-[95%]  h-4/5 mt-4">
+                  <div className="w-[100%]  h-4/5 mt-4">
                     <Swiper
                       slidesPerView={width < 400 ? 1 : width < 720 ? 2 : 3}
                       spaceBetween={25}
@@ -335,15 +348,17 @@ const Landing = () => {
                     >
                       {foodContext.foods.map((item, index) => (
                         <div key={index}>
-                          <SwiperSlide key={index} className="rounded-lg ">
+                          <SwiperSlide key={index}>
                             <Link
+                              style={{ height: "300px" }}
+                              className="rounded-lg w-[400px]"
                               to={`/food/${item.id}`}
                               state={{ data: item }}
                               key={index}
                             >
                               <FoodCard
                                 imgSrc={{
-                                  mainfood: require(`../assets/foods/discount/0.jpg`),
+                                  mainfood: item.picture,
                                   lable: require(`../assets/storeLable/0.png`),
                                 }}
                                 name={item.foodName}

@@ -91,7 +91,7 @@ export default function FoodContextProvider(props) {
         setBuyFood,
         totalCount,
         setTotalCount,
-        foods,
+        foods: allfoods,
       }}
     >
       {props.children}
