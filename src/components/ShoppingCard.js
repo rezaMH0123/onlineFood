@@ -1,4 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { foodPay } from "../api/apiFoodPay";
 import cardEmpty from "../assets/icons/fig-cart-empty.png";
 import { FoodContext } from "../context/FoodContextProvider";
 export default function ShoppingCard({ singleFood }) {
@@ -52,6 +55,55 @@ export default function ShoppingCard({ singleFood }) {
       }
     }
   };
+  const notify = (type) => {
+    if (type == "success") {
+      toast.success("Wow so easy!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (type == "error") {
+      toast.error("Please fill in all the blanks", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.warn("plese first sign in", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
+  const submitFoood = async () => {
+    const token = localStorage.getItem("userToken");
+
+    // let data = {};
+    // foodContext.buyFood.forEach((element) => {
+    //   data[`"${element.id}"`] = element.count;
+    // });
+    if (token) {
+      // await foodPay({ token: token, data: data });
+      notify("success");
+    } else {
+      notify("warn");
+    }
+  };
+
   useEffect(() => {
     var totalCount = 0;
     if (foodContext.buyFood.length > 0) {
@@ -68,7 +120,7 @@ export default function ShoppingCard({ singleFood }) {
       {foodContext.buyFood == 0 ? (
         <div className="text-center">
           <img className="mt-4" alt="emptyCard" src={cardEmpty} />
-          <span className="text-center text-lg text-[#ccc ]">
+          <span className="text-center text-lg text-[#ccc]">
             سبد خرید خالی است
           </span>
         </div>
@@ -157,13 +209,17 @@ export default function ShoppingCard({ singleFood }) {
               </div>
             </div>
             <div className="registratedBtn flex justify-center">
-              <div className="w-64 mt-4 cursor-pointer  bg-red-500 h-fit p-3 flex justify-center items-center rounded-md text-white text-lg ">
+              <div
+                onClick={submitFoood}
+                className="w-64 mt-4 cursor-pointer  bg-red-500 h-fit p-3 flex justify-center items-center rounded-md text-white text-lg "
+              >
                 نهایی کردن سفارش
               </div>
             </div>
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }

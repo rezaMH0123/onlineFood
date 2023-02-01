@@ -19,6 +19,7 @@ const SingleFood = () => {
         discount: food.discount,
         price: food.price,
         count: countOfBuy + 1,
+        id: food.id,
       },
     ]);
   };

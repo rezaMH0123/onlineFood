@@ -382,8 +382,8 @@ const Landing = () => {
                   JUST EAT اپلیکیشن موبایل
                 </h1>
                 <p className="mt-4 w-5/6 text-center">
-                  برای دریافت لینک دانلود اپلیکیشن دلینو، شماره موبایلت رو وارد
-                  کن
+                  برای دریافت لینک دانلود اپلیکیشن JUST EAT شماره موبایلت رو
+                  وارد کن
                 </p>
                 <form>
                   <div className="flex flex-row-reverse mt-8">
@@ -434,7 +434,7 @@ const Landing = () => {
 
                   <ul className="flex flex-wrap justify-center mr-2">
                     <li className="text-white cursor-pointer m-2 hover:font-bold">
-                      وبلاگ دلینو
+                      وبلاگ JUST EAT
                     </li>
                     <li className="text-white cursor-pointer m-2 hover:font-bold">
                       درباره
@@ -458,8 +458,8 @@ const Landing = () => {
                 </div>
                 <p className=" mt-8 text-[#e3e3e3] text-right">
                   تمامی لوگوها و اطلاعات رستوران ها با احترام متعلق به مالکین
-                  رستوران ها است و امتیاز استفاده از این اطلاعات تنها برای دلینو
-                  مجاز است
+                  رستوران ها است و امتیاز استفاده از این اطلاعات تنها برای JUST
+                  EAT مجاز است
                 </p>
               </div>
               <div className="flex-1 flex flex-col md:items-start items-center h-full p-4">
